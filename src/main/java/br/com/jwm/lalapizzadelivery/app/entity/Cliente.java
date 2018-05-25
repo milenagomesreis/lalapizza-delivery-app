@@ -43,4 +43,5 @@ public class Cliente extends Usuario {
 	public void setTelefone(Long telefone) {
 		this.telefone = telefone;
 	}
+
 }

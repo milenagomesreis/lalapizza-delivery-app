@@ -7,8 +7,8 @@ import javax.persistence.*;
 public class Cidade {
 
 	@Id
-	@SequenceGenerator(name="cidadeSequence", sequenceName="CIDADE_SEQUENCE")
-	@GeneratedValue(strategy = GenerationType.AUTO, generator="cidadeSequence")
+	@SequenceGenerator(name = "cidadeSequence", sequenceName = "CIDADE_SEQUENCE")
+	@GeneratedValue(strategy = GenerationType.AUTO, generator = "cidadeSequence")
 	@Column(name = "ID")
 	private Long id;
 
@@ -18,7 +18,5 @@ public class Cidade {
 	@JoinColumn(name = "ESTADO_ID", referencedColumnName = "ID", foreignKey = @ForeignKey(name = "FK_CIDADE_ESTADO"))
 	@ManyToOne(optional = false, fetch = FetchType.LAZY)
 	private Estado estado;
-
-
 
 }

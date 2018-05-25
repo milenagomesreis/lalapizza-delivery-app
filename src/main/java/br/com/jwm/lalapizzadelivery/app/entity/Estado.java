@@ -46,5 +46,6 @@ public class Estado {
 	public void setUf(String uf) {
 		this.uf = uf;
 	}
+
 }
 

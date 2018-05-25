@@ -15,6 +15,9 @@ public class Pessoa {
 	@Column(name = "NOME", length = 100)
 	private String nome;
 
+	@Column(name = "TELEFONE")
+	private Long telefone;
+
 	public Pessoa() {
 
 	}
@@ -34,4 +37,5 @@ public class Pessoa {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+
 }

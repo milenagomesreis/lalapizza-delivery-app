@@ -4,7 +4,9 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "MOTOBOY")
-public class Motoboy extends Pessoa {
+@Table(name = "PRODUTO")
+public class Produto {
+
+
 
 }

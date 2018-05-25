@@ -23,4 +23,5 @@ public class Funcionario extends Usuario {
 	public void setCargo(Cargo cargo) {
 		this.cargo = cargo;
 	}
+
 }
