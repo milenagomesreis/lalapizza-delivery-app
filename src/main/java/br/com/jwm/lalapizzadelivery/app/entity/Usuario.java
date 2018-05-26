@@ -1,6 +1,6 @@
 package br.com.jwm.lalapizzadelivery.app.entity;
 
-import br.com.jwm.lalapizzadelivery.app.entity.hardcode.Perfil;
+import br.com.jwm.lalapizzadelivery.app.entity.constant.Perfil;
 
 import javax.persistence.*;
 

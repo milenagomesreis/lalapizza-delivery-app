@@ -5,11 +5,11 @@ import javax.persistence.*;
 @Entity
 @Table(name = "PESSOA")
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public class Pessoa {
+public abstract class Pessoa {
 
 	@Id
 	@SequenceGenerator(name = "pessoaSequence", sequenceName = "PESSOA_SEQUENCE")
-	@GeneratedValue(generator = "pessoaSequence", strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(generator = "pessoaSequence", strategy = GenerationType.TABLE)
 	private Long id;
 
 	@Column(name = "NOME", length = 100)

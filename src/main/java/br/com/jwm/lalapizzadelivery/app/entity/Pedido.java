@@ -14,7 +14,8 @@ public class Pedido {
 	@Column(name = "ID")
 	private Long id;
 
-	@Column(name= "CLIENTE", length = 50)
+	@ManyToOne
+	@JoinColumn(name = "CLIENTE_ID", referencedColumnName = "ID", foreignKey = @ForeignKey(name = "FK_PEDIDO_CLIENTE"))
 	private Cliente cliente;
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "pedido")

@@ -8,7 +8,7 @@ public class Endereco {
 
 	@Id
 	@SequenceGenerator(name = "enderecoSequence", sequenceName = "ENDERECO_SEQUENCE")
-	@GeneratedValue(generator = "enderecoSequence", strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(generator = "enderecoSequence", strategy = GenerationType.AUTO)
 	private Long id;
 
 	@Column(name = "LOGRADOURO", length = 100)
@@ -32,6 +32,10 @@ public class Endereco {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "CIDADE_ID", referencedColumnName = "ID", foreignKey = @ForeignKey(name = "FK_ENDERECO_CIDADE"))
 	private Cidade cidade;
+
+	@OneToOne
+	@JoinColumn(name = "CLIENTE_ID", referencedColumnName = "ID", foreignKey = @ForeignKey(name = "FK_ENDERECO_CLIENTE"))
+	private Cliente cliente;
 
 	public Endereco() {
 
@@ -100,5 +104,12 @@ public class Endereco {
 	public void setCidade(Cidade cidade) {
 		this.cidade = cidade;
 	}
-	
+
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
 }

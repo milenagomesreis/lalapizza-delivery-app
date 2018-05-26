@@ -19,6 +19,10 @@ public class Cidade {
 	@ManyToOne(optional = false, fetch = FetchType.LAZY)
 	private Estado estado;
 
+	public Cidade() {
+
+	}
+
 	public Long getId() {
 		return id;
 	}

@@ -1,21 +1,32 @@
 package br.com.jwm.lalapizzadelivery.app.entity;
 
-import br.com.jwm.lalapizzadelivery.app.entity.hardcode.Status;
+import br.com.jwm.lalapizzadelivery.app.entity.constant.Status;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "LOG_STATUS")
 public class LogStatus {
 
+	@Id
+	@SequenceGenerator(name="logStatusSequence", sequenceName="LOG_STATUS_SEQUENCE")
+	@GeneratedValue(strategy = GenerationType.AUTO, generator="logStatusSequence")
+	@Column(name = "ID")
+	private Long id;
+
+	@ManyToOne
+	@JoinColumn(name = "PEDIDO_ID", referencedColumnName = "ID", foreignKey = @ForeignKey(name = "FK_LOG_STATUS_PEDIDO"))
 	private Pedido pedido;
 
+	@ManyToOne
+	@JoinColumn(name = "USUARIO_ID", referencedColumnName = "ID", foreignKey = @ForeignKey(name = "FK_LOG_STATUS_USUARIO"))
 	private Usuario usuario;
 
+	@Column(name = "STATUS")
 	private Status status;
 
+	@Column(name = "DATA")
 	private LocalDateTime data;
 
 	public LogStatus() {

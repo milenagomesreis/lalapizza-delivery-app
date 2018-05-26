@@ -12,8 +12,12 @@ public class Cliente extends Usuario {
 	@Column(name = "CPF", length = 11)
 	private String cpf;
 
-	@OneToOne(mappedBy = "endereco")
+	@OneToOne(mappedBy = "cliente")
 	private Endereco endereco;
+
+	public Cliente() {
+
+	}
 
 	public String getCpf() {
 		return cpf;

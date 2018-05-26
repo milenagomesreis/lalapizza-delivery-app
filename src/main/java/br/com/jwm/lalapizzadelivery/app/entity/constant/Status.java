@@ -1,4 +1,4 @@
-package br.com.jwm.lalapizzadelivery.app.entity.hardcode;
+package br.com.jwm.lalapizzadelivery.app.entity.constant;
 
 public enum Status {
 
