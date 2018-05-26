@@ -12,13 +12,8 @@ public class Cliente extends Usuario {
 	@Column(name = "CPF", length = 11)
 	private String cpf;
 
-	@Column(name = "ENDERECO_ID")
 	@OneToOne(mappedBy = "endereco")
 	private Endereco endereco;
-
-	@Column(name = "TELEFONE")
-	private Long telefone;
-
 
 	public String getCpf() {
 		return cpf;
@@ -34,14 +29,6 @@ public class Cliente extends Usuario {
 
 	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
-	}
-
-	public Long getTelefone() {
-		return telefone;
-	}
-
-	public void setTelefone(Long telefone) {
-		this.telefone = telefone;
 	}
 
 }

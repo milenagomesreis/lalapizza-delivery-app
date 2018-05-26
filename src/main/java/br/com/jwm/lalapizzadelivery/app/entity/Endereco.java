@@ -7,6 +7,7 @@ import javax.persistence.*;
 public class Endereco {
 
 	@Id
+	@SequenceGenerator(name = "enderecoSequence", sequenceName = "ENDERECO_SEQUENCE")
 	@GeneratedValue(generator = "enderecoSequence", strategy = GenerationType.SEQUENCE)
 	private Long id;
 
