@@ -13,10 +13,10 @@ public class Estado {
 	@Column(name = "ID")
 	private Long id;
 
-	@Column(name = "NOME")
+	@Column(name = "NOME", length = 50)
 	private String nome;
 
-	@Column(name = "UF")
+	@Column(name = "UF", length = 2)
 	private String uf;
 
 	public Estado() {

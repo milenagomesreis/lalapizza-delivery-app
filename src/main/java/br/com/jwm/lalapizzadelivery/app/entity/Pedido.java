@@ -21,10 +21,10 @@ public class Pedido {
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "pedido")
 	private List<ProdutoPedido> produtoPedidoList;
 
-	@Column(name= "VALOR_TOTAL")
+	@Column(name = "VALOR_TOTAL")
 	private Double valorTotal;
 
-	@Column(name= "DATA")
+	@Column(name = "DATA")
 	private LocalDateTime data;
 
 	@ManyToOne

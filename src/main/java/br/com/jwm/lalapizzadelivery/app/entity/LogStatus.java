@@ -23,6 +23,7 @@ public class LogStatus {
 	@JoinColumn(name = "USUARIO_ID", referencedColumnName = "ID", foreignKey = @ForeignKey(name = "FK_LOG_STATUS_USUARIO"))
 	private Usuario usuario;
 
+	@Enumerated(EnumType.STRING)
 	@Column(name = "STATUS")
 	private Status status;
 

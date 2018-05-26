@@ -17,16 +17,16 @@ public class Endereco {
 	@Column(name = "NUMERO")
 	private Integer numero;
 
-	@Column(name = "COMPLEMENTO")
+	@Column(name = "COMPLEMENTO", length = 50)
 	private String complemento;
 
-	@Column(name = "REFERENCIA")
+	@Column(name = "REFERENCIA", length = 50)
 	private String referencia;
 
 	@Column(name = "CEP")
 	private Integer cep;
 
-	@Column(name = "BAIRRO")
+	@Column(name = "BAIRRO", length = 50)
 	private String bairro;
 
 	@ManyToOne(fetch = FetchType.LAZY)

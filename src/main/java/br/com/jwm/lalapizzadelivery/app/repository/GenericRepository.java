@@ -2,10 +2,7 @@ package br.com.jwm.lalapizzadelivery.app.repository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.persistence.TypedQuery;
+import javax.persistence.*;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
@@ -15,19 +12,17 @@ import java.util.List;
 
 public abstract class GenericRepository<T extends Object, ID extends Object> {
 
-	private EntityManagerFactory entityManagerFactory;
+	@PersistenceContext
+	private EntityManager entityManager;
 
-	@Autowired
 	public GenericRepository() {
-		entityManagerFactory = Persistence.createEntityManagerFactory(getClassName());
 	}
 
 	private String getClassName() {
-		return getPersistenceClass().getName();
+		return getPersistenceClass().getSimpleName();
 	}
 
 	public T salvar(T t) {
-		EntityManager entityManager = entityManagerFactory.createEntityManager();
 
 		entityManager.getTransaction().begin();
 		t = entityManager.merge(t);
@@ -38,22 +33,16 @@ public abstract class GenericRepository<T extends Object, ID extends Object> {
 	}
 
 	public List<T> listar() {
-		EntityManager entityManager = entityManagerFactory.createEntityManager();
-
 		CriteriaBuilder builder = entityManager.getCriteriaBuilder();
 
 		CriteriaQuery<T> criteria = builder.createQuery((Class<T>) getPersistenceClass());
 		criteria.from(getPersistenceClass());
 
-		List<T> list = entityManager.createQuery(criteria).getResultList();
+		return entityManager.createQuery(criteria).getResultList();
 
-		entityManager.close();
-
-		return list;
 	}
 
 	public T getById(ID id) {
-		EntityManager entityManager = entityManagerFactory.createEntityManager();
 
 		CriteriaBuilder builder = entityManager.getCriteriaBuilder();
 
@@ -61,13 +50,8 @@ public abstract class GenericRepository<T extends Object, ID extends Object> {
 		Root<T> from = criteria.from((Class<T>) getPersistenceClass());
 		TypedQuery<T> typedQuery = entityManager.createQuery(criteria.select(from).where(builder.equal(from.get("id"), id)));
 
-		T t = typedQuery.getSingleResult();
-
-		entityManager.close();
-
-		return t;
+		return typedQuery.getSingleResult();
 	}
-
 
 	private Class<?> getPersistenceClass() {
 		Type type = null;

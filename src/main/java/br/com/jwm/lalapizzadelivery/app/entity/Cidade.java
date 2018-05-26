@@ -12,7 +12,7 @@ public class Cidade {
 	@Column(name = "ID")
 	private Long id;
 
-	@Column(name = "NOME")
+	@Column(name = "NOME", length = 50)
 	private String nome;
 
 	@JoinColumn(name = "ESTADO_ID", referencedColumnName = "ID", foreignKey = @ForeignKey(name = "FK_CIDADE_ESTADO"))
