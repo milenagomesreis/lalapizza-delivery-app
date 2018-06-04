@@ -4,11 +4,11 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "CIDADE")
-public class Cidade {
+public class Cidade extends BaseEntity {
 
 	@Id
 	@SequenceGenerator(name = "cidadeSequence", sequenceName = "CIDADE_SEQUENCE")
-	@GeneratedValue(strategy = GenerationType.AUTO, generator = "cidadeSequence")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "cidadeSequence")
 	@Column(name = "ID")
 	private Long id;
 

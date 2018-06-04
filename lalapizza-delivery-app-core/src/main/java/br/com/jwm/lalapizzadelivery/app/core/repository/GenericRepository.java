@@ -1,32 +1,30 @@
 package br.com.jwm.lalapizzadelivery.app.core.repository;
 
+import br.com.jwm.lalapizzadelivery.app.core.entity.BaseEntity;
+import org.springframework.stereotype.Repository;
+
 import javax.persistence.*;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import javax.transaction.Transactional;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.List;
+import java.util.Optional;
 
-public abstract class GenericRepository<T extends Object, ID extends Object> {
+public abstract class GenericRepository<T extends BaseEntity, ID extends Object> {
 
 	@PersistenceContext
 	private EntityManager entityManager;
-
-	public GenericRepository() {
-	}
 
 	private String getClassName() {
 		return getPersistenceClass().getSimpleName();
 	}
 
+	@Transactional
 	public T salvar(T t) {
-
-		entityManager.getTransaction().begin();
 		t = entityManager.merge(t);
-		entityManager.getTransaction().commit();
-		entityManager.close();
-
 		return t;
 	}
 
@@ -40,7 +38,7 @@ public abstract class GenericRepository<T extends Object, ID extends Object> {
 
 	}
 
-	public T getById(ID id) {
+	public Optional<T> getById(ID id) {
 
 		CriteriaBuilder builder = entityManager.getCriteriaBuilder();
 
@@ -48,7 +46,7 @@ public abstract class GenericRepository<T extends Object, ID extends Object> {
 		Root<T> from = criteria.from((Class<T>) getPersistenceClass());
 		TypedQuery<T> typedQuery = entityManager.createQuery(criteria.select(from).where(builder.equal(from.get("id"), id)));
 
-		return typedQuery.getSingleResult();
+		return Optional.ofNullable(typedQuery.getSingleResult());
 	}
 
 	private Class<?> getPersistenceClass() {

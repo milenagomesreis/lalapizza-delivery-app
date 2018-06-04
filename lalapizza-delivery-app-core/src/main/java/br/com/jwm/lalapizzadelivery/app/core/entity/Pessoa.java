@@ -5,7 +5,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "PESSOA")
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public abstract class Pessoa {
+public abstract class Pessoa extends BaseEntity {
 
 	@Id
 	@SequenceGenerator(name = "pessoaSequence", sequenceName = "PESSOA_SEQUENCE")

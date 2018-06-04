@@ -9,7 +9,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "PRODUTO_PEDIDO")
 @IdClass(PKProdutoPedido.class)
-public class ProdutoPedido {
+public class ProdutoPedido extends BaseEntity {
 
 	@Id
 	private Produto produto;

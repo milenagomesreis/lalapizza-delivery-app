@@ -7,11 +7,11 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "LOG_STATUS")
-public class LogStatus {
+public class LogStatus extends BaseEntity {
 
 	@Id
 	@SequenceGenerator(name = "logStatusSequence", sequenceName = "LOG_STATUS_SEQUENCE")
-	@GeneratedValue(strategy = GenerationType.AUTO, generator = "logStatusSequence")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "logStatusSequence")
 	@Column(name = "ID")
 	private Long id;
 

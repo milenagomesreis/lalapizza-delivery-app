@@ -6,11 +6,11 @@ import java.util.List;
 
 @Entity
 @Table(name = "PEDIDO")
-public class Pedido {
+public class Pedido extends BaseEntity {
 
 	@Id
 	@SequenceGenerator(name = "pedidoSequence", sequenceName = "PEDIDO_SEQUENCE")
-	@GeneratedValue(strategy = GenerationType.AUTO, generator = "pedidoSequence")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "pedidoSequence")
 	@Column(name = "ID")
 	private Long id;
 

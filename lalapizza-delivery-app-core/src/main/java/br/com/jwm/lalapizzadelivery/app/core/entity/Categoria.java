@@ -4,15 +4,15 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "CATEGORIA")
-public class Categoria {
+public class Categoria extends BaseEntity {
 
 	@Id
 	@SequenceGenerator(name = "categoriaSequence", sequenceName = "CATEGORIA_SEQUENCE")
-	@GeneratedValue(strategy = GenerationType.AUTO, generator = "categoriaSequence")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "categoriaSequence")
 	@Column(name = "ID")
 	private Long id;
 
-	@Column(name = "NOME", length = 20)
+	@Column(name = "NOME", length = 20, nullable = false)
 	private String nome;
 
 	public Categoria() {
