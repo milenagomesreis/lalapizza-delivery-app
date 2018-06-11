@@ -1,9 +1,6 @@
 package br.com.jwm.lalapizzadelivery.app.core.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "CLIENTE")
@@ -18,6 +15,15 @@ public class Cliente extends Usuario {
 	public Cliente() {
 
 	}
+
+//	@Id
+//	@SequenceGenerator(name = "clienteSequence", allocationSize = 1, initialValue = 1, sequenceName = "CLIENTE_SEQUENCE")
+//	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "clienteSequence")
+//	@Column(name = "ID")
+//	@Override
+//	public Long getId() {
+//		return super.getId();
+//	}
 
 	public String getCpf() {
 		return cpf;

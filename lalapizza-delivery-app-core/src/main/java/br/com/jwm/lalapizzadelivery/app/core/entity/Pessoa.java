@@ -16,7 +16,7 @@ public abstract class Pessoa extends BaseEntity {
 	private String nome;
 
 	@Column(name = "TELEFONE")
-	private Long telefone;
+	private String telefone;
 
 	public Pessoa() {
 
@@ -38,4 +38,11 @@ public abstract class Pessoa extends BaseEntity {
 		this.nome = nome;
 	}
 
+	public String getTelefone() {
+		return telefone;
+	}
+
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
+	}
 }

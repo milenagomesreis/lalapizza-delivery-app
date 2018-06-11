@@ -8,7 +8,7 @@ import javax.persistence.*;
 public class Estado extends BaseEntity {
 
 	@Id
-	@SequenceGenerator(name = "estadoSequence", sequenceName = "ESTADO_SEQUENCE")
+	@SequenceGenerator(name = "estadoSequence", allocationSize = 1, initialValue = 1, sequenceName = "ESTADO_SEQUENCE")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "estadoSequence")
 	@Column(name = "ID")
 	private Long id;

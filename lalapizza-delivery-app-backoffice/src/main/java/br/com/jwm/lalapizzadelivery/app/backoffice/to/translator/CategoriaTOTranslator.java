@@ -1,6 +1,5 @@
 package br.com.jwm.lalapizzadelivery.app.backoffice.to.translator;
 
-
 import br.com.jwm.lalapizzadelivery.app.backoffice.to.CategoriaTO;
 import br.com.jwm.lalapizzadelivery.app.core.entity.Categoria;
 import org.springframework.lang.NonNull;

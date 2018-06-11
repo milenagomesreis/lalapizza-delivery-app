@@ -16,6 +16,15 @@ public class Funcionario extends Usuario {
 
 	}
 
+//	@Id
+//	@SequenceGenerator(name = "funcionarioSequence", allocationSize = 1, initialValue = 1, sequenceName = "FUNCIONARIO_SEQUENCE")
+//	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "funcionarioSequence")
+//	@Column(name = "ID")
+//	@Override
+//	public Long getId() {
+//		return super.getId();
+//	}
+
 	public Cargo getCargo() {
 		return cargo;
 	}

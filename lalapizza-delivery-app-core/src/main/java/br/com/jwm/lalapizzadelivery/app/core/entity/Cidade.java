@@ -7,7 +7,7 @@ import javax.persistence.*;
 public class Cidade extends BaseEntity {
 
 	@Id
-	@SequenceGenerator(name = "cidadeSequence", sequenceName = "CIDADE_SEQUENCE")
+	@SequenceGenerator(name = "cidadeSequence", allocationSize = 1, initialValue = 1, sequenceName = "CIDADE_SEQUENCE")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "cidadeSequence")
 	@Column(name = "ID")
 	private Long id;

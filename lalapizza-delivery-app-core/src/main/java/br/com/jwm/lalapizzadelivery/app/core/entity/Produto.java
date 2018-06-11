@@ -25,6 +25,10 @@ public class Produto extends BaseEntity {
 	@JoinColumn(name = "CATEGORIA_ID", referencedColumnName = "ID", foreignKey = @ForeignKey(name = "FK_PRODUTO_CATEGORIA"))
 	private Categoria categoria;
 
+	@Column(name = "URL_IMAGEM", length = 150)
+	private String urlImagem;
+
+
 	public Produto() {
 
 	}
@@ -67,5 +71,13 @@ public class Produto extends BaseEntity {
 
 	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
+	}
+
+	public String getUrlImagem() {
+		return urlImagem;
+	}
+
+	public void setUrlImagem(String urlImagem) {
+		this.urlImagem = urlImagem;
 	}
 }
