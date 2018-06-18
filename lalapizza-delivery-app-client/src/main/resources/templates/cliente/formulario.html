@@ -1,0 +1,125 @@
+<html layout:decorate="~{layout/layout}"
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<div layout:fragment="conteudo" class="container">
+
+	<h1 class="mt-4 mb-3">Cliente
+		<small>Formulário</small>
+	</h1>
+
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item">
+			<a th:href="@{/}">Página inicial</a>
+		</li>
+		<li class="breadcrumb-item active">Registre-se</li>
+	</ol>
+	<div class="row">
+		<div class="col-md-12 mb-4">
+			<form th:object="${clienteTO}" th:action="@{/registre-se}" method="post">
+				<input type="hidden" th:field="*{id}">
+				<div class="form-group">
+					<label for="nome">Nome</label>
+					<input type="text" class="form-control" id="nome" th:field="*{nome}">
+					<div th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}" th:style="'color:red; padding:5px'"/>
+				</div>
+				<div class="form-group">
+					<label for="telefone">Telefone</label>
+					<input type="text" class="form-control" id="telefone" th:field="*{telefone}">
+					<div th:if="${#fields.hasErrors('telefone')}" th:errors="*{telefone}" th:style="'color:red; padding:5px'"/>
+				</div>
+				<div class="form-group">
+					<label for="email">E-mail</label>
+					<input type="email" class="form-control" id="email" th:field="*{email}">
+					<div th:if="${#fields.hasErrors('email')}" th:errors="*{email}" th:style="'color:red; padding:5px'"/>
+				</div>
+				<div class="form-group">
+					<label for="senha">Senha</label>
+					<input type="password" class="form-control" id="senha" th:field="*{senha}">
+					<div th:if="${#fields.hasErrors('senha')}" th:errors="*{senha}" th:style="'color:red; padding:5px'"/>
+				</div>
+
+				<fieldset>
+					<div class="form-group">
+						<label for="cep">CEP</label>
+						<input type="text" class="form-control" id="cep" th:field="*{endereco.cep}">
+						<div th:if="${#fields.hasErrors('endereco.cep')}" th:errors="*{endereco.cep}" th:style="'color:red; padding:5px'"/>
+					</div>
+					<div class="form-group">
+						<label for="logradouro">Logradouro</label>
+						<input type="text" class="form-control" id="logradouro" readonly  th:field="*{endereco.logradouro}">
+						<div th:if="${#fields.hasErrors('endereco.logradouro')}" th:errors="*{endereco.logradouro}" th:style="'color:red; padding:5px'"/>
+					</div>
+					<div class="form-group">
+						<label for="numero">Nº</label>
+						<input type="text" class="form-control" id="numero" th:field="*{endereco.numero}">
+						<div th:if="${#fields.hasErrors('endereco.numero')}" th:errors="*{endereco.numero}" th:style="'color:red; padding:5px'"/>
+					</div>
+					<div class="form-group">
+						<label for="complemento">Complemento</label>
+						<input type="text" class="form-control" id="complemento" th:field="*{endereco.complemento}">
+						<div th:if="${#fields.hasErrors('endereco.complemento')}" th:errors="*{endereco.complemento}" th:style="'color:red; padding:5px'"/>
+					</div>
+					<div class="form-group">
+						<label for="referencia">Referência</label>
+						<input type="text" class="form-control" id="referencia" th:field="*{endereco.referencia}">
+						<div th:if="${#fields.hasErrors('endereco.referencia')}" th:errors="*{endereco.referencia}" th:style="'color:red; padding:5px'"/>
+					</div>
+					<div class="form-group">
+						<label for="bairro">Bairro</label>
+						<input type="text" class="form-control" id="bairro" readonly th:field="*{endereco.bairro}">
+						<div th:if="${#fields.hasErrors('endereco.bairro')}" th:errors="*{endereco.bairro}" th:style="'color:red; padding:5px'"/>
+					</div>
+					<div class="form-group">
+						<label for="estado">Estado</label>
+						<select class="form-control" id="estado" readonly th:field="*{endereco.cidade.estado.uf}">
+							<option th:each="estado : ${estados}" th:value="${estado.uf}" th:text="${estado.nome}"></option>
+						</select>
+						<div th:if="${#fields.hasErrors('endereco.cidade.estado')}" th:errors="*{endereco.cidade.estado}" th:style="'color:red; padding:5px'"/>
+					</div>
+					<div class="form-group">
+						<label for="cidade">Cidade</label>
+						<select class="form-control" id="cidade" readonly th:field="*{endereco.cidade.id}">
+						</select>
+						<div th:if="${#fields.hasErrors('endereco.cidade')}" th:errors="*{endereco.cidade}" th:style="'color:red; padding:5px'"/>
+					</div>
+				</fieldset>
+				<button type="submit" class="btn btn-dark">Salvar</button>
+			</form>
+		</div>
+	</div>
+</div>
+<th:block layout:fragment="js-script">
+	<script>
+		$('#cep').focusout(function() {
+		    if($('#cep').val().trim() != '') {
+				 $.ajax({
+					 "url" : "/enderecos/cep/busca",
+					 "method" : "POST",
+					 "contentType": "application/json",
+					 "data" : $('#cep').val(),
+					 "success": function (endereco) {
+					     console.log(endereco);
+
+						 $('#estado').val(endereco.cidade.estado.uf);
+						 $('#bairro').val(endereco.bairro);
+                         $('#logradouro').val(endereco.logradouro);
+
+                         $("#cidade").html(
+                             $('<option>', {
+                             "value" : endereco.cidade.id,
+							 "text" : endereco.cidade.nome
+						 	})
+						 );
+                         $("#cidade").val(endereco.cidade.id);
+                     },
+					 "error" : function (erro) {
+						 alert(erro);
+                     }
+				 })
+			}
+		});
+
+        $('#cep').focusout();
+	</script>
+</th:block>
+</html>

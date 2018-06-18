@@ -20,13 +20,13 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/admin/motoboys")
-public class BackofficeMotoboyController {
+public class MotoboyController {
 
 	@Autowired
-	MotoboyTOTranslator motoboyTOTranslator;
+	private MotoboyTOTranslator motoboyTOTranslator;
 
 	@Autowired
-	MotoboyService motoboyService;
+	private MotoboyService motoboyService;
 
 	@GetMapping
 	public String listar(Model model) {

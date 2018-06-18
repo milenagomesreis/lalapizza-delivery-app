@@ -21,13 +21,13 @@ import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/admin/funcionarios")
-public class BackofficeFuncionarioController {
+public class FuncionarioController {
 
 	@Autowired
-	FuncionarioTOTranslator funcionarioTOTranslator;
+	private FuncionarioTOTranslator funcionarioTOTranslator;
 
 	@Autowired
-	FuncionarioService funcionarioService;
+	private FuncionarioService funcionarioService;
 
 	@GetMapping
 	public String listar(Model model) {

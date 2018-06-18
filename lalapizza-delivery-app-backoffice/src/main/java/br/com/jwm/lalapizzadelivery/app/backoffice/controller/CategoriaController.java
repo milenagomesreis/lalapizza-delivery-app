@@ -16,13 +16,13 @@ import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/admin/categorias")
-public class BackofficeCategoriaController {
+public class CategoriaController {
 
 	@Autowired
-	CategoriaTOTranslator categoriaTOTranslator;
+	private CategoriaTOTranslator categoriaTOTranslator;
 
 	@Autowired
-	CategoriaService categoriaService;
+	private CategoriaService categoriaService;
 
 	@GetMapping
 	public String listar(Model model) {

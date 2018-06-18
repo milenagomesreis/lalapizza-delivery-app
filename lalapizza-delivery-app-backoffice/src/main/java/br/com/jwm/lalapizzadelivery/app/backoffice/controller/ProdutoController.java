@@ -4,10 +4,9 @@ import br.com.jwm.lalapizzadelivery.app.backoffice.to.ProdutoTO;
 import br.com.jwm.lalapizzadelivery.app.core.entity.Produto;
 import br.com.jwm.lalapizzadelivery.app.core.repository.ProdutoRepository;
 import br.com.jwm.lalapizzadelivery.app.core.service.CategoriaService;
-import br.com.jwm.lalapizzadelivery.app.core.service.CloudinaryService;
+import br.com.jwm.lalapizzadelivery.app.core.cloudinary.service.CloudinaryService;
 import br.com.jwm.lalapizzadelivery.app.core.service.ProdutoService;
 import br.com.jwm.lalapizzadelivery.app.backoffice.to.translator.ProdutoTOTranslator;
-import com.cloudinary.Cloudinary;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,33 +24,28 @@ import javax.validation.Valid;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 @Controller
 @RequestMapping("/admin/produtos")
-public class BackofficeProdutoController {
+public class ProdutoController {
 
 	@Autowired
-	ProdutoRepository produtoRepository;
+	private ProdutoTOTranslator produtoTOTranslator;
 
 	@Autowired
-	ProdutoTOTranslator produtoTOTranslator;
+	private ProdutoService produtoService;
 
 	@Autowired
-	ProdutoService produtoService;
+	private CategoriaService categoriaService;
 
 	@Autowired
-	CategoriaService categoriaService;
-
-	@Autowired
-	CloudinaryService cloudinaryService;
+	private CloudinaryService cloudinaryService;
 
 	@GetMapping
 	public String listar(Model model) {
 
-		model.addAttribute("produtos", produtoRepository.listar());
+		model.addAttribute("produtos", produtoService.listar());
 
 		return "produto/lista";
 	}
@@ -65,30 +59,34 @@ public class BackofficeProdutoController {
 	}
 
 	@PostMapping("/novo")
-	public String adicionar(Model model, @Valid ProdutoTO produtoTO, BindingResult bindingResult) throws IOException {
+	public String adicionar(Model model, @Valid ProdutoTO produtoTO, BindingResult bindingResult) {
 
-		if(produtoTO.isCreate() && produtoTO.getImagem() == null) {
+		if (produtoTO.isCreate() && produtoTO.getImagem() == null) {
 			bindingResult.addError(new FieldError("produtoTO", "imagem", "Imagem é obrigatória"));
 		}
 
-		if(bindingResult.hasErrors()) {
+		if (bindingResult.hasErrors()) {
 			return exibirFormulario(model, produtoTO);
 		}
 
 		Map<String, String> imageMap = new HashMap<>();
 
-		if(produtoTO.isCreate() || produtoTO.getImagem() != null) {
+		if (produtoTO.isCreate() || produtoTO.getImagem() != null) {
 
 			File file = new File("/tmp/imagemProduto-" + produtoTO.getNome() + "-" + produtoTO.getImagem().getOriginalFilename());
-			FileUtils.writeByteArrayToFile(file, produtoTO.getImagem().getBytes());
 
-			imageMap = cloudinaryService.uploadImage(file);
+			try {
+				FileUtils.writeByteArrayToFile(file, produtoTO.getImagem().getBytes());
+				imageMap = cloudinaryService.uploadImage(file);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 
 		Produto produto = produtoTOTranslator.toToEntity(produtoTO);
 		produto.setUrlImagem(imageMap.get("url"));
 
-		produtoRepository.salvar(produto);
+		produtoService.salvar(produto);
 
 		return "redirect:/admin/produtos";
 	}
@@ -96,7 +94,7 @@ public class BackofficeProdutoController {
 	@GetMapping("/{id}/editar")
 	public String exibirFormulario(Model model, @PathVariable String id) {
 
-		if(!StringUtils.isNumeric(id)) {
+		if (!StringUtils.isNumeric(id)) {
 			return "/errors/404";
 		}
 

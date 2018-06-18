@@ -8,7 +8,7 @@ import javax.persistence.*;
 public abstract class Pessoa extends BaseEntity {
 
 	@Id
-	@SequenceGenerator(name = "pessoaSequence", sequenceName = "PESSOA_SEQUENCE")
+	@SequenceGenerator(name = "pessoaSequence", allocationSize = 1, initialValue = 1, sequenceName = "PESSOA_SEQUENCE")
 	@GeneratedValue(generator = "pessoaSequence", strategy = GenerationType.TABLE)
 	private Long id;
 

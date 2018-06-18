@@ -24,7 +24,7 @@ public class Endereco extends BaseEntity {
 	private String referencia;
 
 	@Column(name = "CEP")
-	private Integer cep;
+	private String cep;
 
 	@Column(name = "BAIRRO", length = 50)
 	private String bairro;
@@ -81,11 +81,11 @@ public class Endereco extends BaseEntity {
 		this.referencia = referencia;
 	}
 
-	public Integer getCep() {
+	public String getCep() {
 		return cep;
 	}
 
-	public void setCep(Integer cep) {
+	public void setCep(String cep) {
 		this.cep = cep;
 	}
 

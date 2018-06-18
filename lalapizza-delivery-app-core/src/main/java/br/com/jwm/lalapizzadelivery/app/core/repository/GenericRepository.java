@@ -16,7 +16,7 @@ import java.util.Optional;
 public abstract class GenericRepository<T extends BaseEntity, ID extends Object> {
 
 	@PersistenceContext
-	private EntityManager entityManager;
+	protected EntityManager entityManager;
 
 	private String getClassName() {
 		return getPersistenceClass().getSimpleName();

@@ -12,7 +12,7 @@ import java.util.List;
 public class MotoboyService {
 
 	@Autowired
-	MotoboyRepository motoboyRepository;
+	private MotoboyRepository motoboyRepository;
 
 	public Motoboy salvar(Motoboy motoboy) {
 

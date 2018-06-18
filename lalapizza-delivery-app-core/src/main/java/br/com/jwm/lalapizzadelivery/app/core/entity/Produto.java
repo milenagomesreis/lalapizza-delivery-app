@@ -7,7 +7,7 @@ import javax.persistence.*;
 public class Produto extends BaseEntity {
 
 	@Id
-	@SequenceGenerator(name = "produtoSequence", sequenceName = "PRODUTO_SEQUENCE")
+	@SequenceGenerator(name = "produtoSequence", allocationSize = 1, initialValue = 1, sequenceName = "PRODUTO_SEQUENCE")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "produtoSequence")
 	@Column(name = "ID")
 	private Long id;

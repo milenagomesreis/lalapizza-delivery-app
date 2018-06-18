@@ -12,7 +12,7 @@ import java.util.List;
 public class CategoriaService {
 
 	@Autowired
-	CategoriaRepository categoriaRepository;
+	private CategoriaRepository categoriaRepository;
 
 	public Categoria salvar(Categoria categoria) {
 		

@@ -1,4 +1,4 @@
-package br.com.jwm.lalapizzadelivery.app.core.service;
+package br.com.jwm.lalapizzadelivery.app.core.cloudinary.service;
 
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;

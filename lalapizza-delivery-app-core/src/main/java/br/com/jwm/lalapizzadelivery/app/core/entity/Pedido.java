@@ -9,7 +9,7 @@ import java.util.List;
 public class Pedido extends BaseEntity {
 
 	@Id
-	@SequenceGenerator(name = "pedidoSequence", sequenceName = "PEDIDO_SEQUENCE")
+	@SequenceGenerator(name = "pedidoSequence", allocationSize = 1, initialValue = 1, sequenceName = "PEDIDO_SEQUENCE")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "pedidoSequence")
 	@Column(name = "ID")
 	private Long id;

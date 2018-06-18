@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 public class LogStatus extends BaseEntity {
 
 	@Id
-	@SequenceGenerator(name = "logStatusSequence", sequenceName = "LOG_STATUS_SEQUENCE")
+	@SequenceGenerator(name = "logStatusSequence", allocationSize = 1, initialValue = 1, sequenceName = "LOG_STATUS_SEQUENCE")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "logStatusSequence")
 	@Column(name = "ID")
 	private Long id;
